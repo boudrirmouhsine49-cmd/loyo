@@ -1,25 +1,17 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-import { Sidebar } from "@/components/layout/Sidebar";
-import { Topbar } from "@/components/layout/Topbar";
+import { ReactNode, useState } from "react";
+import Sidebar from "./Sidebar";
+import Topbar from "./Topbar";
 
-type Props = {
-  children: ReactNode;
-};
-
-// Assemble Sidebar + Topbar + contenu, et porte l'état d'ouverture
-// du drawer mobile (partagé entre les deux composants).
-export function AppShell({ children }: Props) {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
+export default function AppShell({ children }: { children: ReactNode }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <div className="flex min-h-screen bg-app">
-      <Sidebar open={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
-
+    <div className="flex min-h-screen">
+      <Sidebar open={menuOpen} onClose={() => setMenuOpen(false)} />
       <div className="flex min-w-0 flex-1 flex-col">
-        <Topbar onMenuClick={() => setMobileNavOpen(true)} />
-        <main className="flex-1 p-4 lg:p-6">{children}</main>
+        <Topbar onMenu={() => setMenuOpen(true)} />
+        <main className="mx-auto w-full max-w-6xl flex-1 px-5 py-6">{children}</main>
       </div>
     </div>
   );

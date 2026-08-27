@@ -1,55 +1,44 @@
 "use client";
 
-import { X } from "lucide-react";
-import { navGroups } from "@/lib/nav";
-import { NavItem } from "@/components/layout/NavItem";
+import { navigation } from "@/lib/nav";
+import { merchantName } from "@/data/mock";
+import NavItem from "./NavItem";
 
-type Props = {
-  open: boolean;
-  onClose: () => void;
-};
+type Props = { open: boolean; onClose: () => void };
 
-// Navigation principale. Sur mobile elle se transforme en drawer
-// (repliée par défaut, ouverte via le bouton menu de la Topbar).
-export function Sidebar({ open, onClose }: Props) {
+export default function Sidebar({ open, onClose }: Props) {
   return (
     <>
-      {/* Fond assombri derrière le drawer mobile */}
+      {/* voile sombre sur mobile quand le menu est ouvert */}
       {open && (
-        <button
-          aria-label="Fermer le menu"
+        <div
           onClick={onClose}
-          className="fixed inset-0 z-40 bg-black/40 lg:hidden"
+          className="fixed inset-0 z-30 bg-black/30 md:hidden"
         />
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-64 shrink-0 flex-col border-r border-border bg-card p-4 transition-transform lg:static lg:z-auto lg:translate-x-0 ${
+        className={`fixed z-40 flex h-full w-64 flex-col border-r border-line bg-card transition-transform md:sticky md:top-0 md:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="mb-6 flex items-center justify-between px-2">
-          <span className="text-lg font-semibold text-text">Loyo</span>
-          <button
-            aria-label="Fermer le menu"
-            onClick={onClose}
-            className="rounded-btn-sm p-1 text-text-3 hover:bg-hover lg:hidden"
-          >
-            <X size={18} />
-          </button>
+        <div className="flex items-center gap-2 px-5 py-5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-[9px] bg-btn text-btn-text text-[15px] font-bold">
+            L
+          </div>
+          <div>
+            <div className="text-[14px] font-semibold leading-tight">Loyo</div>
+            <div className="text-[11px] text-text-3 leading-tight">{merchantName}</div>
+          </div>
         </div>
 
-        <nav className="flex flex-1 flex-col gap-5 overflow-y-auto">
-          {navGroups.map((group) => (
-            <div key={group.label}>
-              <p className="mb-1 px-3 font-mono text-[11px] tracking-[.05em] text-text-muted uppercase">
-                {group.label}
-              </p>
-              <div className="flex flex-col gap-0.5">
-                {group.links.map((link) => (
-                  <NavItem key={link.href} link={link} onNavigate={onClose} />
-                ))}
-              </div>
+        <nav className="flex-1 overflow-y-auto px-3 pb-6">
+          {navigation.map((group) => (
+            <div key={group.title} className="mb-4">
+              <div className="label px-3 pb-1.5 pt-2">{group.title}</div>
+              {group.links.map((link) => (
+                <NavItem key={link.slug} {...link} onNavigate={onClose} />
+              ))}
             </div>
           ))}
         </nav>

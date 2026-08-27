@@ -2,30 +2,23 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { NavLink } from "@/lib/nav";
 
-type Props = {
-  link: NavLink;
-  onNavigate?: () => void;
-};
+type Props = { slug: string; label: string; onNavigate?: () => void };
 
-// Un lien de la sidebar, surligné quand la route active correspond.
-export function NavItem({ link, onNavigate }: Props) {
+export default function NavItem({ slug, label, onNavigate }: Props) {
   const pathname = usePathname();
-  const active = pathname === link.href || pathname?.startsWith(`${link.href}/`);
-  const Icon = link.icon;
-
+  const active = pathname === `/${slug}`;
   return (
     <Link
-      href={link.href}
+      href={`/${slug}`}
       onClick={onNavigate}
-      aria-current={active ? "page" : undefined}
-      className={`flex items-center gap-3 rounded-btn px-3 py-2 text-sm transition-colors ${
-        active ? "bg-subtle text-text" : "text-text-2 hover:bg-hover hover:text-text"
+      className={`block rounded-[10px] px-3 py-2 text-[13.5px] transition-colors ${
+        active
+          ? "bg-subtle font-medium text-text"
+          : "text-text-2 hover:bg-subtle"
       }`}
     >
-      <Icon size={18} strokeWidth={2} />
-      <span>{link.label}</span>
+      {label}
     </Link>
   );
 }

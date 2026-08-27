@@ -1,66 +1,55 @@
-import type { LucideIcon } from "lucide-react";
-import {
-  LayoutDashboard,
-  Users,
-  Gift,
-  CreditCard,
-  Megaphone,
-  BarChart3,
-  BellRing,
-  Cake,
-  UserPlus,
-  Zap,
-  History,
-  Download,
-  Settings,
-  UsersRound,
-} from "lucide-react";
+import type { NavGroup } from "./types";
 
-export type NavLink = {
-  label: string;
-  href: string;
-  icon: LucideIcon;
-};
-
-export type NavGroup = {
-  label: string;
-  links: NavLink[];
-};
-
-// Structure de la sidebar : un groupe = une section (voir CLAUDE.md, section 4).
-export const navGroups: NavGroup[] = [
+export const navigation: NavGroup[] = [
   {
-    label: "Quotidien",
+    title: "Quotidien",
     links: [
-      { label: "Pilotage", href: "/dashboard", icon: LayoutDashboard },
-      { label: "Clients", href: "/clients", icon: Users },
+      { slug: "dashboard", label: "Pilotage" },
+      { slug: "clients", label: "Clients" },
     ],
   },
   {
-    label: "Fidélité",
+    title: "Fidélité",
     links: [
-      { label: "Récompenses", href: "/recompenses", icon: Gift },
-      { label: "Carte de fidélité", href: "/carte", icon: CreditCard },
-      { label: "Campagnes", href: "/campagnes", icon: Megaphone },
-      { label: "Résultats", href: "/resultats", icon: BarChart3 },
+      { slug: "recompenses", label: "Récompenses" },
+      { slug: "carte", label: "Carte de fidélité" },
+      { slug: "campagnes", label: "Campagnes" },
+      { slug: "resultats", label: "Résultats" },
     ],
   },
   {
-    label: "Automatisations",
+    title: "Automatisations",
     links: [
-      { label: "Relance", href: "/relance", icon: BellRing },
-      { label: "Anniversaires", href: "/anniversaires", icon: Cake },
-      { label: "Parrainage", href: "/parrainage", icon: UserPlus },
-      { label: "Offres flash", href: "/offres-flash", icon: Zap },
+      { slug: "relance", label: "Relance auto" },
+      { slug: "anniversaires", label: "Anniversaires" },
+      { slug: "parrainage", label: "Parrainage" },
+      { slug: "offres-flash", label: "Offres flash" },
     ],
   },
   {
-    label: "Compte",
+    title: "Compte",
     links: [
-      { label: "Notifications", href: "/notifications", icon: History },
-      { label: "Export", href: "/export", icon: Download },
-      { label: "Paramètres", href: "/parametres", icon: Settings },
-      { label: "Équipe", href: "/equipe", icon: UsersRound },
+      { slug: "notifications", label: "Notifications" },
+      { slug: "export", label: "Export" },
+      { slug: "equipe", label: "Équipe" },
+      { slug: "parametres", label: "Paramètres" },
     ],
   },
 ];
+
+export const pageMeta: Record<string, [string, string]> = {
+  dashboard: ["Tableau de bord", "Vue d'ensemble de votre programme de fidélité"],
+  clients: ["Clients", "Tous les clients de votre programme"],
+  recompenses: ["Récompenses", "Créez et gérez les récompenses de votre programme"],
+  carte: ["Carte de fidélité", "Personnalisez la carte digitale de votre commerce"],
+  campagnes: ["Campagnes", "Créez et suivez vos campagnes de fidélisation"],
+  resultats: ["Résultats", "La valeur générée par votre programme de fidélité"],
+  relance: ["Relance des inactifs", "Faites revenir les clients qui décrochent"],
+  anniversaires: ["Offres d'anniversaire", "Une attention automatique le jour J"],
+  parrainage: ["Parrainage", "Vos clients recommandent, tout le monde gagne"],
+  "offres-flash": ["Offres flash", "Des offres ponctuelles pour les heures creuses"],
+  notifications: ["Notifications", "Historique des messages envoyés à vos clients"],
+  export: ["Export", "Vos données, où vous en avez besoin"],
+  equipe: ["Équipe", "Gérez les comptes de votre équipe"],
+  parametres: ["Paramètres", "Compte, abonnement et équipe"],
+};

@@ -1,36 +1,26 @@
-import { Card } from "@/components/ui/Card";
-import { Pill } from "@/components/ui/Pill";
-import type { CampaignPreview, CampaignStatus } from "@/lib/types";
+import { campaignsPreview } from "@/data/mock";
+import { campaignStatusColor } from "@/lib/colors";
+import Card from "@/components/ui/Card";
+import Pill from "@/components/ui/Pill";
 
-type Props = {
-  campaigns: CampaignPreview[];
-};
-
-const statusLabel: Record<CampaignStatus, string> = {
-  active: "Active",
-  planifiee: "Planifiée",
-  automatique: "Automatique",
-};
-
-const statusTone: Record<CampaignStatus, "success" | "info" | "special"> = {
-  active: "success",
-  planifiee: "info",
-  automatique: "special",
-};
-
-export function CampaignsPreview({ campaigns }: Props) {
+export default function CampaignsPreview() {
   return (
-    <Card title="Campagnes" subtitle="Aperçu de vos campagnes en cours">
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {campaigns.map((campaign) => (
-          <div key={campaign.id} className="rounded-btn border border-border bg-faint p-4">
-            <p className="text-sm font-medium text-text">{campaign.name}</p>
-            <div className="mt-2">
-              <Pill tone={statusTone[campaign.status]}>{statusLabel[campaign.status]}</Pill>
-            </div>
-          </div>
-        ))}
-      </div>
+    <Card>
+      <div className="text-[15px] font-semibold">Campagnes</div>
+      <ul className="mt-4 space-y-2.5">
+        {campaignsPreview.map((c) => {
+          const [color, bg] = campaignStatusColor[c.status];
+          return (
+            <li
+              key={c.name}
+              className="flex items-center justify-between rounded-[10px] border border-line-light bg-faint px-3.5 py-2.5"
+            >
+              <span className="text-[13.5px] font-medium">{c.name}</span>
+              <Pill color={color} bg={bg}>{c.status}</Pill>
+            </li>
+          );
+        })}
+      </ul>
     </Card>
   );
 }

@@ -1,9 +1,17 @@
-// Écran "Parrainage" — construit à la Phase 1 (données de data/mock.ts).
-export default function ParrainagePage() {
+import PageHeader from "@/components/layout/PageHeader";
+import Card from "@/components/ui/Card";
+import { pageMeta } from "@/lib/nav";
+
+export default function Page() {
+  const [title, subtitle] = pageMeta["parrainage"];
   return (
-    <div className="rounded-card border border-border bg-card p-6">
-      <h1 className="text-lg font-semibold text-text">Parrainage</h1>
-      <p className="mt-2 text-sm text-text-3">Cet écran sera construit à la Phase 1.</p>
-    </div>
+    <>
+      <PageHeader title={title} subtitle={subtitle} />
+      <Card>
+        <p className="text-[14px] text-text-3">
+          Cet écran arrive bientôt. On le construira à l&apos;étape suivante.
+        </p>
+      </Card>
+    </>
   );
 }

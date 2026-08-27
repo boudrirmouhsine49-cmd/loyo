@@ -1,125 +1,101 @@
 @import "tailwindcss";
 
-/*
- * Variables du thème CLAIR (valeurs par défaut sur :root).
- * Le thème SOMBRE écrase ces mêmes variables plus bas,
- * quand <html data-theme="dark">.
- */
+/* ===== Loyo — design tokens (repris du prototype) ===== */
 :root {
-  --bg-app: #fafafa;
-  --bg-card: #ffffff;
-  --bg-faint: #fafafa;
-  --bg-subtle: #f0f0f0;
-  --bg-hover: #e4e4e4;
-  --bg-glass: rgba(250, 250, 250, 0.85);
-
-  --border: #e4e4e4;
-  --border-light: #efefef;
-
-  --text: #0a0a0a;
+  --bg-app: #FAFAFA;
+  --bg-card: #FFFFFF;
+  --bg-faint: #FAFAFA;
+  --bg-subtle: #F0F0F0;
+  --bg-hover: #E4E4E4;
+  --border: #E4E4E4;
+  --border-light: #EFEFEF;
+  --text: #0A0A0A;
   --text-2: #454545;
   --text-3: #828282;
-  --text-muted: #9e9e9e;
-
+  --text-muted: #9E9E9E;
   --btn: #171717;
-  --btn-text: #ffffff;
+  --btn-text: #FFFFFF;
   --btn-hover: #000000;
+
+  /* couleurs sémantiques (identiques dans les 2 thèmes) */
+  --tier-or: #B0894A;
+  --tier-argent: #93A0A8;
+  --tier-bronze: #B07446;
+  --succes: #1E7A50;      --succes-bg: #E7F4EC;
+  --alerte: #D14343;      --alerte-bg: #FBEBEA;
+  --info: #B0714A;        --info-bg: #F6ECE2;
+  --special: #4C86C4;     --special-bg: #E8F0F9;
+  --accent: #171717;      --accent-bg: #F0F0F0;
+
+  --radius-card: 15px;
+  --radius-input: 10px;
+  --radius-pill: 20px;
 }
 
 [data-theme="dark"] {
   --bg-app: #131313;
-  --bg-glass: rgba(19, 19, 19, 0.85);
-  --bg-card: #1d1d1d;
+  --bg-card: #1D1D1D;
   --bg-faint: #232323;
-  --bg-subtle: #2b2b2b;
+  --bg-subtle: #2B2B2B;
   --bg-hover: #343434;
-
   --border: #303030;
   --border-light: #292929;
-
-  --text: #f2f2f2;
-  --text-2: #c7c7c7;
-  --text-3: #9b9b9b;
+  --text: #F2F2F2;
+  --text-2: #C7C7C7;
+  --text-3: #9B9B9B;
   --text-muted: #757575;
-
-  --btn: #f2f2f2;
+  --btn: #F2F2F2;
   --btn-text: #111111;
-  --btn-hover: #ffffff;
+  --btn-hover: #FFFFFF;
+  --accent: #F2F2F2;      --accent-bg: #2B2B2B;
+  --succes-bg: #16281F;
+  --alerte-bg: #2A1615;
+  --info-bg: #241A12;
+  --special-bg: #14212F;
 }
 
-/*
- * Couleurs sémantiques : identiques dans les deux thèmes,
- * donc pas besoin d'override dans [data-theme="dark"].
- */
-:root {
-  --gold: #b0894a;
-  --silver: #93a0a8;
-  --bronze: #b07446;
-
-  --success: #1e7a50;
-  --success-bg: #e7f4ec;
-  --danger: #d14343;
-  --danger-bg: #fbebea;
-  --info: #b0714a;
-  --info-bg: #f6ece2;
-  --special: #4c86c4;
-  --special-bg: #e8f0f9;
-  --accent: #171717;
-  --accent-bg: #f0f0f0;
-}
-
-/* Mappe les variables CSS sur des tokens Tailwind (bg-app, text-2, rounded-card, font-mono...) */
+/* On branche les tokens sur Tailwind v4 pour écrire bg-card, text-text-2, etc. */
 @theme inline {
   --color-app: var(--bg-app);
   --color-card: var(--bg-card);
   --color-faint: var(--bg-faint);
   --color-subtle: var(--bg-subtle);
   --color-hover: var(--bg-hover);
-  --color-glass: var(--bg-glass);
-
-  --color-border: var(--border);
-  --color-border-light: var(--border-light);
-
+  --color-line: var(--border);
+  --color-line-light: var(--border-light);
   --color-text: var(--text);
   --color-text-2: var(--text-2);
   --color-text-3: var(--text-3);
   --color-text-muted: var(--text-muted);
-
   --color-btn: var(--btn);
   --color-btn-text: var(--btn-text);
-  --color-btn-hover: var(--btn-hover);
-
-  --color-gold: var(--gold);
-  --color-silver: var(--silver);
-  --color-bronze: var(--bronze);
-
-  --color-success: var(--success);
-  --color-success-bg: var(--success-bg);
-  --color-danger: var(--danger);
-  --color-danger-bg: var(--danger-bg);
+  --color-or: var(--tier-or);
+  --color-argent: var(--tier-argent);
+  --color-bronze: var(--tier-bronze);
+  --color-succes: var(--succes);
+  --color-alerte: var(--alerte);
   --color-info: var(--info);
-  --color-info-bg: var(--info-bg);
   --color-special: var(--special);
-  --color-special-bg: var(--special-bg);
-  --color-accent: var(--accent);
-  --color-accent-bg: var(--accent-bg);
-
-  --radius-card: 15px;
-  --radius-btn: 10px;
-  --radius-btn-sm: 9px;
-  --radius-pill: 20px;
-
+  --radius-card: var(--radius-card);
   --font-sans: var(--font-inter);
-  --font-mono: var(--font-plex-mono);
+  --font-mono: var(--font-mono);
 }
 
+* { box-sizing: border-box; }
+html, body { padding: 0; margin: 0; }
 body {
   background: var(--bg-app);
   color: var(--text);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background .2s ease, color .2s ease;
 }
-
-/* Chiffres et statistiques alignés (largeur fixe des chiffres) */
-.tabular-nums {
-  font-variant-numeric: tabular-nums;
+.mono { font-family: var(--font-mono), monospace; }
+.label {
+  font-family: var(--font-mono), monospace;
+  font-size: 10.5px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
+.tnum { font-variant-numeric: tabular-nums; }

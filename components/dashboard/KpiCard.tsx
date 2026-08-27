@@ -1,20 +1,20 @@
-import { Card } from "@/components/ui/Card";
-import { Stat } from "@/components/ui/Stat";
-import { Pill } from "@/components/ui/Pill";
 import type { Kpi } from "@/lib/types";
+import Card from "@/components/ui/Card";
 
-type Props = {
-  kpi: Kpi;
-};
-
-export function KpiCard({ kpi }: Props) {
+export default function KpiCard({ kpi }: { kpi: Kpi }) {
   return (
     <Card>
-      <div className="flex items-start justify-between gap-3">
-        <Stat label={kpi.label} value={kpi.value} />
-        <Pill tone={kpi.trendTone}>{kpi.trend}</Pill>
+      <div className="label">{kpi.label}</div>
+      <div className="mt-2 flex items-end gap-2">
+        <div className="tnum text-[26px] font-semibold leading-none">{kpi.value}</div>
+        <span
+          className="tnum mb-0.5 rounded-[20px] px-2 py-0.5 text-[11px] font-semibold"
+          style={{ color: "var(--succes)", background: "var(--succes-bg)" }}
+        >
+          {kpi.trend}
+        </span>
       </div>
-      <p className="mt-3 text-xs text-text-3">{kpi.caption}</p>
+      <div className="mt-2 text-[12px] text-text-3">{kpi.compare}</div>
     </Card>
   );
 }

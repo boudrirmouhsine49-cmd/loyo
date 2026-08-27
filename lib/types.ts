@@ -1,55 +1,31 @@
-// Types centralisés de l'app. Complétés au fur et à mesure des écrans
-// (voir CLAUDE.md, section "Modèle de données").
-
-export type Tier = "or" | "argent" | "bronze";
-
-export type TrendTone = "success" | "danger";
+export type Tier = "Or" | "Argent" | "Bronze";
 
 export type Kpi = {
-  id: string;
   label: string;
   value: string;
-  caption: string;
+  compare: string;
   trend: string;
-  trendTone: TrendTone;
 };
 
-export type OnboardingStep = {
-  id: string;
-  label: string;
-  done: boolean;
-};
+export type OnboardingStep = { label: string; done: boolean };
 
-export type WeeklyVisit = {
-  day: string;
-  visits: number;
-};
+export type TierStat = { name: Tier; count: number };
 
-export type TierBreakdownItem = {
-  tier: Tier;
-  label: string;
-  count: number;
-};
-
-export type ActivityItem = {
-  id: string;
+export type Activity = {
   who: string;
-  action: string;
-  detail?: string;
+  what: string;
   when: string;
+  kind: "points" | "tier" | "campaign" | "reward" | "auto" | "join";
 };
 
-export type ReactivationClient = {
-  id: string;
+export type Inactive = {
   name: string;
   tier: Tier;
-  inactiveDays: number;
+  days: number;
 };
 
-export type CampaignStatus = "active" | "planifiee" | "automatique";
+export type CampaignStatus = "Active" | "Planifiée" | "Automatique";
+export type Campaign = { name: string; status: CampaignStatus };
 
-export type CampaignPreview = {
-  id: string;
-  name: string;
-  status: CampaignStatus;
-};
+export type NavLink = { slug: string; label: string };
+export type NavGroup = { title: string; links: NavLink[] };

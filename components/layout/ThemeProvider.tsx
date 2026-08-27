@@ -1,17 +1,12 @@
 "use client";
 
-import { createContext, useCallback, useContext, useSyncExternalStore, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useSyncExternalStore, ReactNode } from "react";
 
 type Theme = "light" | "dark";
+type Ctx = { theme: Theme; toggle: () => void };
 
-type ThemeContextValue = {
-  theme: Theme;
-  toggleTheme: () => void;
-};
-
+const ThemeContext = createContext<Ctx | null>(null);
 const STORAGE_KEY = "loyo-theme";
-
-const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 // Le thème est une donnée externe (attribut data-theme sur <html>, posé
 // par le script anti-flash de app/layout.tsx) : on la lit avec
@@ -37,7 +32,7 @@ function subscribe(onStoreChange: () => void) {
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  const toggleTheme = useCallback(() => {
+  const toggle = useCallback(() => {
     const next: Theme = getSnapshot() === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", next);
     try {
@@ -47,13 +42,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={{ theme, toggle }}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme() {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error("useTheme doit être utilisé à l'intérieur de <ThemeProvider>");
-  }
-  return context;
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error("useTheme doit être utilisé dans ThemeProvider");
+  return ctx;
 }
