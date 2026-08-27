@@ -25,7 +25,11 @@ export type Inactive = {
 };
 
 export type CampaignStatus = "Active" | "Planifiée" | "Automatique";
-export type Campaign = { name: string; status: CampaignStatus };
+export type Campaign = { name: string; status: CampaignStatus; usagePct?: number };
+
+export type VisitPoint = { label: string; visits: number };
+
+export type CurrentUser = { name: string; role: string };
 
 export type NavLink = { slug: string; label: string };
 export type NavGroup = { title: string; links: NavLink[] };

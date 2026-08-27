@@ -1,11 +1,16 @@
 import type {
-  Kpi, OnboardingStep, TierStat, Activity, Inactive, Campaign,
+  Kpi, OnboardingStep, TierStat, Activity, Inactive, Campaign, VisitPoint, CurrentUser,
 } from "@/lib/types";
 
 // Données de démonstration du tableau de bord (Café du Coin).
 // À remplacer par des vraies données (Supabase) en Phase 3.
 
 export const merchantName = "Café du Coin";
+
+export const currentUser: CurrentUser = { name: "Gilles C.", role: "Gérant" };
+
+// Même donnée que le KPI "Taux de retour", utilisée par le donut ReturnDonut.
+export const returnRatePct = 68;
 
 export const dashboardKpis: Kpi[] = [
   { label: "Clients actifs", value: "2 131", compare: "2 027 le mois dernier", trend: "+5,1 %" },
@@ -22,15 +27,21 @@ export const onboardingSteps: OnboardingStep[] = [
   { label: "Enregistrez votre premier client", done: false },
 ];
 
-// Visites par jour de la semaine (lun -> dim)
-export const weeklyVisits: { day: string; visits: number }[] = [
-  { day: "Lun", visits: 118 },
-  { day: "Mar", visits: 132 },
-  { day: "Mer", visits: 124 },
-  { day: "Jeu", visits: 140 },
-  { day: "Ven", visits: 156 },
-  { day: "Sam", visits: 112 },
-  { day: "Dim", visits: 70 },
+// Visites par semaine, 12 dernières semaines (du plus ancien au plus récent).
+// +42 % entre la première et la dernière semaine (852 = visites de la semaine, cf. KPI).
+export const weeklyVisitsTrend: VisitPoint[] = [
+  { label: "il y a 12 sem.", visits: 600 },
+  { label: "il y a 11 sem.", visits: 615 },
+  { label: "il y a 10 sem.", visits: 640 },
+  { label: "il y a 9 sem.", visits: 655 },
+  { label: "il y a 8 sem.", visits: 670 },
+  { label: "il y a 7 sem.", visits: 690 },
+  { label: "il y a 6 sem.", visits: 705 },
+  { label: "il y a 5 sem.", visits: 730 },
+  { label: "il y a 4 sem.", visits: 750 },
+  { label: "il y a 3 sem.", visits: 780 },
+  { label: "il y a 2 sem.", visits: 810 },
+  { label: "cette semaine", visits: 852 },
 ];
 
 export const tierStats: TierStat[] = [
@@ -56,8 +67,8 @@ export const inactives: Inactive[] = [
 ];
 
 export const campaignsPreview: Campaign[] = [
-  { name: "Retour client", status: "Active" },
-  { name: "Café offert", status: "Active" },
+  { name: "Retour client", status: "Active", usagePct: 24 },
+  { name: "Café offert", status: "Active", usagePct: 38 },
   { name: "Double points le week-end", status: "Planifiée" },
   { name: "Anniversaire", status: "Automatique" },
 ];

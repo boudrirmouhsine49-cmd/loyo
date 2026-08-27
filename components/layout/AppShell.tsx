@@ -1,18 +1,23 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import Sidebar from "./Sidebar";
-import Topbar from "./Topbar";
+import { MobileNavProvider, useMobileNav } from "./MobileNavContext";
 
-export default function AppShell({ children }: { children: ReactNode }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+function Shell({ children }: { children: ReactNode }) {
+  const { open, setOpen } = useMobileNav();
   return (
     <div className="flex min-h-screen">
-      <Sidebar open={menuOpen} onClose={() => setMenuOpen(false)} />
-      <div className="flex min-w-0 flex-1 flex-col">
-        <Topbar onMenu={() => setMenuOpen(true)} />
-        <main className="mx-auto w-full max-w-6xl flex-1 px-5 py-6">{children}</main>
-      </div>
+      <Sidebar open={open} onClose={() => setOpen(false)} />
+      <main className="mx-auto w-full max-w-6xl flex-1 px-5 py-6">{children}</main>
     </div>
+  );
+}
+
+export default function AppShell({ children }: { children: ReactNode }) {
+  return (
+    <MobileNavProvider>
+      <Shell>{children}</Shell>
+    </MobileNavProvider>
   );
 }
