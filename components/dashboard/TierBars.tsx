@@ -12,7 +12,10 @@ export default function TierBars() {
         {tierStats.map((t) => (
           <div key={t.name}>
             <div className="mb-1 flex items-center justify-between text-[13px]">
-              <span className="font-medium" style={{ color: tierColor[t.name] }}>{t.name}</span>
+              <span className="flex items-center gap-2 font-medium text-text-2">
+                <span className="h-2 w-2 rounded-[2px]" style={{ background: tierColor[t.name] }} />
+                {t.name}
+              </span>
               <span className="tnum text-text-3">{fr(t.count)}</span>
             </div>
             <div className="h-2 w-full overflow-hidden rounded-full bg-subtle">

@@ -16,6 +16,7 @@
   --btn: #171717;
   --btn-text: #FFFFFF;
   --btn-hover: #000000;
+  --bg-sidebar: #FFFFFF;
 
   /* couleurs sémantiques (identiques dans les 2 thèmes) */
   --tier-or: #B0894A;
@@ -47,6 +48,7 @@
   --btn: #F2F2F2;
   --btn-text: #111111;
   --btn-hover: #FFFFFF;
+  --bg-sidebar: #0A0A0A;
   --accent: #F2F2F2;      --accent-bg: #2B2B2B;
   --succes-bg: #16281F;
   --alerte-bg: #2A1615;
@@ -61,6 +63,7 @@
   --color-faint: var(--bg-faint);
   --color-subtle: var(--bg-subtle);
   --color-hover: var(--bg-hover);
+  --color-sidebar: var(--bg-sidebar);
   --color-line: var(--border);
   --color-line-light: var(--border-light);
   --color-text: var(--text);

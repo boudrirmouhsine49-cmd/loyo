@@ -14,7 +14,10 @@ const dot: Record<Activity["kind"], string> = {
 export default function ActivityFeed() {
   return (
     <Card>
-      <div className="text-[15px] font-semibold">Activité récente</div>
+      <div className="flex items-center justify-between">
+        <div className="text-[15px] font-semibold">Activité récente</div>
+        <button className="text-[12.5px] font-medium text-text-2 hover:text-text">Tout voir</button>
+      </div>
       <ul className="mt-4 space-y-3.5">
         {recentActivity.map((a, i) => (
           <li key={i} className="flex items-start gap-3">
