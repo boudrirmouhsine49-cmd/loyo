@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+/* ===== Loyo — design tokens (repris du prototype) ===== */
+:root {
+  --bg-app: #FAFAFA;
+  --bg-card: #FFFFFF;
+  --bg-faint: #FAFAFA;
+  --bg-subtle: #F0F0F0;
+  --bg-hover: #E4E4E4;
+  --border: #E4E4E4;
+  --border-light: #EFEFEF;
+  --text: #0A0A0A;
+  --text-2: #454545;
+  --text-3: #828282;
+  --text-muted: #9E9E9E;
+  --btn: #171717;
+  --btn-text: #FFFFFF;
+  --btn-hover: #000000;
+
+  /* couleurs sémantiques (identiques dans les 2 thèmes) */
+  --tier-or: #B0894A;
+  --tier-argent: #93A0A8;
+  --tier-bronze: #B07446;
+  --succes: #1E7A50;      --succes-bg: #E7F4EC;
+  --alerte: #D14343;      --alerte-bg: #FBEBEA;
+  --info: #B0714A;        --info-bg: #F6ECE2;
+  --special: #4C86C4;     --special-bg: #E8F0F9;
+  --accent: #171717;      --accent-bg: #F0F0F0;
+
+  --radius-card: 15px;
+  --radius-input: 10px;
+  --radius-pill: 20px;
+}
+
+[data-theme="dark"] {
+  --bg-app: #131313;
+  --bg-card: #1D1D1D;
+  --bg-faint: #232323;
+  --bg-subtle: #2B2B2B;
+  --bg-hover: #343434;
+  --border: #303030;
+  --border-light: #292929;
+  --text: #F2F2F2;
+  --text-2: #C7C7C7;
+  --text-3: #9B9B9B;
+  --text-muted: #757575;
+  --btn: #F2F2F2;
+  --btn-text: #111111;
+  --btn-hover: #FFFFFF;
+  --accent: #F2F2F2;      --accent-bg: #2B2B2B;
+  --succes-bg: #16281F;
+  --alerte-bg: #2A1615;
+  --info-bg: #241A12;
+  --special-bg: #14212F;
+}
+
+/* On branche les tokens sur Tailwind v4 pour écrire bg-card, text-text-2, etc. */
+@theme inline {
+  --color-app: var(--bg-app);
+  --color-card: var(--bg-card);
+  --color-faint: var(--bg-faint);
+  --color-subtle: var(--bg-subtle);
+  --color-hover: var(--bg-hover);
+  --color-line: var(--border);
+  --color-line-light: var(--border-light);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-text-muted: var(--text-muted);
+  --color-btn: var(--btn);
+  --color-btn-text: var(--btn-text);
+  --color-or: var(--tier-or);
+  --color-argent: var(--tier-argent);
+  --color-bronze: var(--tier-bronze);
+  --color-succes: var(--succes);
+  --color-alerte: var(--alerte);
+  --color-info: var(--info);
+  --color-special: var(--special);
+  --radius-card: var(--radius-card);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-mono);
+}
+
+* { box-sizing: border-box; }
+html, body { padding: 0; margin: 0; }
+body {
+  background: var(--bg-app);
+  color: var(--text);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background .2s ease, color .2s ease;
+}
+.mono { font-family: var(--font-mono), monospace; }
+.label {
+  font-family: var(--font-mono), monospace;
+  font-size: 10.5px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.tnum { font-variant-numeric: tabular-nums; }
