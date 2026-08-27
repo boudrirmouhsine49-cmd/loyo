@@ -1,4 +1,3 @@
-import { returnRatePct } from "@/data/mock";
 import Card from "@/components/ui/Card";
 
 const SIZE = 120;
@@ -6,8 +5,13 @@ const STROKE = 13;
 const RADIUS = (SIZE - STROKE) / 2;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
-export default function ReturnDonut() {
-  const offset = CIRCUMFERENCE * (1 - returnRatePct / 100);
+type Props = { pct: number };
+
+// VIEW — affichage uniquement. La géométrie du cercle (rayon,
+// circonférence) est un calcul de rendu SVG, pas une règle métier :
+// la donnée elle-même ("pct") vient du Model.
+export default function ReturnDonut({ pct }: Props) {
+  const offset = CIRCUMFERENCE * (1 - pct / 100);
 
   return (
     <Card className="flex items-center gap-5">
@@ -33,7 +37,7 @@ export default function ReturnDonut() {
           fontWeight="700"
           transform={`rotate(90 ${SIZE / 2} ${SIZE / 2})`}
         >
-          {returnRatePct} %
+          {pct} %
         </text>
         <text
           x={SIZE / 2}
@@ -51,7 +55,7 @@ export default function ReturnDonut() {
       <div>
         <div className="text-[15px] font-semibold">Taux de retour</div>
         <p className="mt-1 text-[12.5px] text-text-3">
-          {returnRatePct} % de vos clients reviennent au moins une fois par mois.
+          {pct} % de vos clients reviennent au moins une fois par mois.
         </p>
       </div>
     </Card>

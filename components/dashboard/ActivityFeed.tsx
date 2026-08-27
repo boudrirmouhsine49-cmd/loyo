@@ -1,5 +1,4 @@
-import { recentActivity } from "@/data/mock";
-import type { Activity } from "@/lib/types";
+import type { Activity } from "@/model/types";
 import Card from "@/components/ui/Card";
 
 const dot: Record<Activity["kind"], string> = {
@@ -11,7 +10,9 @@ const dot: Record<Activity["kind"], string> = {
   join: "#8A6DBE",
 };
 
-export default function ActivityFeed() {
+type Props = { items: Activity[] };
+
+export default function ActivityFeed({ items }: Props) {
   return (
     <Card>
       <div className="flex items-center justify-between">
@@ -19,7 +20,7 @@ export default function ActivityFeed() {
         <button className="text-[12.5px] font-medium text-text-2 hover:text-text">Tout voir</button>
       </div>
       <ul className="mt-4 space-y-3.5">
-        {recentActivity.map((a, i) => (
+        {items.map((a, i) => (
           <li key={i} className="flex items-start gap-3">
             <span
               className="mt-1.5 h-2 w-2 shrink-0 rounded-full"

@@ -1,4 +1,7 @@
-import type { NavGroup } from "./types";
+// Configuration de navigation (UI), pas une donnée métier : elle reste
+// dans lib/ plutôt que dans model/.
+type NavLink = { slug: string; label: string };
+type NavGroup = { title: string; links: NavLink[] };
 
 export const navigation: NavGroup[] = [
   {
