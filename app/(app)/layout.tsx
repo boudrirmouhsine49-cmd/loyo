@@ -1,5 +1,7 @@
 import AppShell from "@/components/layout/AppShell";
+import { getCurrentUser } from "@/model/account";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
-  return <AppShell>{children}</AppShell>;
+  const currentUser = getCurrentUser();
+  return <AppShell currentUser={currentUser}>{children}</AppShell>;
 }

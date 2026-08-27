@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { navigation } from "@/lib/nav";
-import { currentUser } from "@/data/mock";
+import type { CurrentUser } from "@/model/types";
 import { initials } from "@/lib/format";
 import NavItem from "./NavItem";
 import ThemeToggle from "./ThemeToggle";
 
-type Props = { open: boolean; onClose: () => void };
+type Props = { open: boolean; onClose: () => void; currentUser: CurrentUser };
 
-export default function Sidebar({ open, onClose }: Props) {
+export default function Sidebar({ open, onClose, currentUser }: Props) {
   return (
     <>
       {/* voile sombre sur mobile quand le menu est ouvert */}

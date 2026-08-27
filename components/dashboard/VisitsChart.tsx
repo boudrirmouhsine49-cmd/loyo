@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { weeklyVisitsTrend } from "@/data/mock";
+import type { VisitPoint } from "@/model/types";
 import { fr } from "@/lib/format";
 import Card from "@/components/ui/Card";
 
@@ -10,21 +10,23 @@ const H = 180;
 const Y_MAX = 950;
 const Y_TOP_GRIDLINE = 800;
 
-function points() {
-  const n = weeklyVisitsTrend.length;
-  return weeklyVisitsTrend.map((point, i) => {
+type Props = { points: VisitPoint[]; growthPct: number };
+
+function toScreenPoints(points: VisitPoint[]) {
+  const n = points.length;
+  return points.map((point, i) => {
     const x = (i / (n - 1)) * W;
     const y = H - (point.visits / Y_MAX) * H;
     return { ...point, x, y };
   });
 }
 
-export default function VisitsChart() {
+// VIEW — affichage uniquement : "growthPct" arrive déjà calculé depuis
+// le Model. Les coordonnées x/y ci-dessous sont un calcul de rendu SVG
+// (placer un point dans le graphique), pas une règle métier.
+export default function VisitsChart({ points, growthPct }: Props) {
   const [hovered, setHovered] = useState<number | null>(null);
-  const pts = points();
-  const first = weeklyVisitsTrend[0].visits;
-  const last = weeklyVisitsTrend[weeklyVisitsTrend.length - 1].visits;
-  const growthPct = Math.round(((last - first) / first) * 100);
+  const pts = toScreenPoints(points);
 
   const linePath = pts.map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
   const areaPath = `${linePath} L${W},${H} L0,${H} Z`;
@@ -91,9 +93,9 @@ export default function VisitsChart() {
       </div>
 
       <div className="mt-2 flex justify-between border-t border-line-light pt-2 text-[11px] text-text-muted">
-        <span>{weeklyVisitsTrend[0].label}</span>
-        <span>{weeklyVisitsTrend[6].label}</span>
-        <span>{weeklyVisitsTrend[weeklyVisitsTrend.length - 1].label}</span>
+        <span>{points[0].label}</span>
+        <span>{points[6].label}</span>
+        <span>{points[points.length - 1].label}</span>
       </div>
     </Card>
   );

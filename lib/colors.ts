@@ -1,4 +1,4 @@
-import type { Tier, CampaignStatus } from "./types";
+import type { Tier, CampaignStatus } from "@/model/types";
 
 export const tierColor: Record<Tier, string> = {
   Or: "var(--tier-or)",

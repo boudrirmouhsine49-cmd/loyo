@@ -1,3 +1,6 @@
+// MODEL — types des données métier (les futures "tables" Supabase).
+// Ce fichier ne contient aucune logique, seulement des formes de données.
+
 export type Tier = "Or" | "Argent" | "Bronze";
 
 export type Kpi = {
@@ -30,6 +33,3 @@ export type Campaign = { name: string; status: CampaignStatus; usagePct?: number
 export type VisitPoint = { label: string; visits: number };
 
 export type CurrentUser = { name: string; role: string };
-
-export type NavLink = { slug: string; label: string };
-export type NavGroup = { title: string; links: NavLink[] };

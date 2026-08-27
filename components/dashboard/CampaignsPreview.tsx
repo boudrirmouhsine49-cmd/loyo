@@ -1,9 +1,11 @@
-import { campaignsPreview } from "@/data/mock";
+import type { Campaign } from "@/model/types";
 import { campaignStatusColor } from "@/lib/colors";
 import Card from "@/components/ui/Card";
 import Pill from "@/components/ui/Pill";
 
-export default function CampaignsPreview() {
+type Props = { campaigns: Campaign[] };
+
+export default function CampaignsPreview({ campaigns }: Props) {
   return (
     <Card>
       <div className="flex items-center justify-between">
@@ -14,7 +16,7 @@ export default function CampaignsPreview() {
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        {campaignsPreview.slice(0, 3).map((c) => {
+        {campaigns.map((c) => {
           const [color, bg] = campaignStatusColor[c.status];
           return (
             <div key={c.name} className="rounded-[10px] border border-line-light bg-faint p-3.5">

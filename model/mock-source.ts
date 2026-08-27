@@ -1,9 +1,10 @@
 import type {
   Kpi, OnboardingStep, TierStat, Activity, Inactive, Campaign, VisitPoint, CurrentUser,
-} from "@/lib/types";
+} from "./types";
 
-// Données de démonstration du tableau de bord (Café du Coin).
-// À remplacer par des vraies données (Supabase) en Phase 3.
+// MODEL — source de données brute (Café du Coin, Phase 1).
+// En Phase 2, ce fichier est remplacé par des requêtes Supabase ; le reste
+// du Model (dashboard.ts, etc.) n'aura pas à changer.
 
 export const merchantName = "Café du Coin";
 

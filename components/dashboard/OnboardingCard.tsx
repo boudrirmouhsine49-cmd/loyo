@@ -1,13 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { onboardingSteps } from "@/data/mock";
+import type { OnboardingStep } from "@/model/types";
 import Card from "@/components/ui/Card";
 
-export default function OnboardingCard() {
+type Props = { steps: OnboardingStep[]; done: number; total: number; pct: number };
+
+// VIEW — affichage uniquement : les compteurs (done/total/pct) arrivent
+// déjà calculés depuis le Model, ce composant ne fait que les afficher.
+export default function OnboardingCard({ steps, done, total, pct }: Props) {
   const [dismissed, setDismissed] = useState(false);
-  const done = onboardingSteps.filter((s) => s.done).length;
-  const pct = Math.round((done / onboardingSteps.length) * 100);
 
   if (dismissed) return null;
 
@@ -17,7 +19,7 @@ export default function OnboardingCard() {
         <div>
           <div className="text-[15px] font-semibold">Bien démarrer avec Loyo</div>
           <p className="mt-0.5 text-[12.5px] text-text-3">
-            {done} / {onboardingSteps.length} étapes terminées
+            {done} / {total} étapes terminées
           </p>
         </div>
 
@@ -36,7 +38,7 @@ export default function OnboardingCard() {
       </div>
 
       <div className="mt-4 flex flex-col gap-2.5 sm:flex-row">
-        {onboardingSteps.map((step) => (
+        {steps.map((step) => (
           <div
             key={step.label}
             className="flex flex-1 items-center gap-2.5 rounded-[11px] border border-line-light px-3.5 py-3"
